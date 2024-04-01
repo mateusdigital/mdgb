@@ -80,4 +80,13 @@ extern u8 curr_input;
 #define JUST_PRESSED(J) ((J & last_input) == 0 && (curr_input & J))
 #define UPDATE_INPUT()  { last_input = curr_input; curr_input = joypad(); }
 
+//
+// Math
+//
+
+// -----------------------------------------------------------------------------
+#define Clamp(_v_, _min_, _max_)  \
+    ((_v_) < (_min_)) ? (_min_) : \
+    ((_v_) > (_max_)) ? (_max_) : \
+                        (_v_)   ;
 #endif // __MDGB_H__
