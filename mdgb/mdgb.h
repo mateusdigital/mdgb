@@ -25,6 +25,9 @@
 
 //------------------------------------------------------------------------------
 #include <gb/gb.h>
+// #include <gbdk/version.h>
+// #include <gbdk/include/rand.h>
+#include <rand.h>
 #include <types.h>
 
 #include <stdio.h>
@@ -89,4 +92,22 @@ extern u8 curr_input;
     ((_v_) < (_min_)) ? (_min_) : \
     ((_v_) > (_max_)) ? (_max_) : \
                         (_v_)   ;
+
+//
+// Random
+//
+
+// -----------------------------------------------------------------------------
+#define Rand_Seed(_v_) initrand(_v_)
+#define Rand_u8() ((u8)(rand() % 255))
+#define Rand_u8_ex(_min_, _max_) ((_min_) + (Rand_u8() % ((_max_) - (_min_))));
+
+
+//
+// Print
+//
+
+// -----------------------------------------------------------------------------
+// #define flushprint(s, ...) do { printf(s, __VA_ARGS__); } while(0);
+#define flushprint(s, ...)
 #endif // __MDGB_H__
