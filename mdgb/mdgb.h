@@ -25,14 +25,13 @@
 
 //------------------------------------------------------------------------------
 #include <gb/gb.h>
-// #include <gbdk/version.h>
-// #include <gbdk/include/rand.h>
+#include <gbdk/emu_debug.h>
+
 #include <rand.h>
 #include <types.h>
 
 #include <stdio.h>
 #include <string.h>
-
 
 //
 // Types
@@ -88,10 +87,22 @@ extern u8 curr_input;
 //
 
 // -----------------------------------------------------------------------------
-#define Clamp(_v_, _min_, _max_)  \
-    ((_v_) < (_min_)) ? (_min_) : \
-    ((_v_) > (_max_)) ? (_max_) : \
+#define Math_Clamp(_v_, _min_, _max_)  \
+    ((_v_) < (_min_)) ? (_min_) :      \
+    ((_v_) > (_max_)) ? (_max_) :      \
                         (_v_)   ;
+
+#define Math_Min(_a_, _b_) \
+    ((_a_) <= (_b_)) ? (_a_) : (_b_)
+
+//
+// Memory
+//
+
+// -----------------------------------------------------------------------------
+#define Memory_ZeroArr(_var_, _type_, _size_) \
+    memset(&_var_, 0, sizeof(_type_) * (_size_))
+
 
 //
 // Random
@@ -109,5 +120,14 @@ extern u8 curr_input;
 
 // -----------------------------------------------------------------------------
 // #define flushprint(s, ...) do { printf(s, __VA_ARGS__); } while(0);
-#define flushprint(s, ...)
+
+#define debugprint(...) { \
+    do {                \
+        EMU_printf("%s:%d", __FILE__, __LINE__); \
+        EMU_printf(__VA_ARGS__); \
+        EMU_printf("-------------------\n"); \
+    } while(0); \
+}
+
+
 #endif // __MDGB_H__
